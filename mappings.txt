@@ -1,0 +1,29 @@
+{
+	"employment_type": {
+		"permanent": "Full Time",
+		"intern": "Internship",
+		"working_student": "Working Student",
+		"trainee": "Trainee",
+		"temporary": "Temporary",
+		"freelance": "Freelance",
+        "FullTime": "Full Time",
+        "Intern": "Internship",
+        "PartTime": "Part Time",
+        "Contract": "Full Time",
+        "Full Time": "Full Time",
+        "Internship": "Internship",
+        "Mid-Senior Level": "Full Time",
+        "Associate": "Full Time",
+        "Entry Level": "Full Time",
+        "Internship": "Internship",
+        "Director": "Full Time",
+        "Executive": "Full Time",
+        "fulltime_permanent": "Full Time",
+        "fulltime": "Full Time",
+        "parttime_minijob": "Part Time",
+        "internship": "Internship",
+        "FTE": "Full Time",
+        "Full-Time": "Full Time",
+        "Working Student": "Working Student"
+	}
+}
