@@ -5,17 +5,21 @@ from extractor import Extractor
 import os
 import pandas as pd
 
-data = pd.read_excel('JobBoards.xlsx', skiprows=1)
+data = pd.read_excel('JobBoards.xlsx')
 
-data_dict = data[['name', 'Link', 'source']]
+
+data = data.dropna(subset=['Implemented'])
+data = data[data['Platform'] == 'Dover']
+
+data_dict = data[['Name', 'Job Feed', 'Platform', 'Source']]
 
 jobs_list = []
 
 for job_board in data_dict.iterrows():
     # if link is not None
-    if job_board[1]['Link'] is not None:
+    if job_board[1]['Job Feed'] is not None:
         try:
-            data_fetcher = DataFetcher.create([job_board[1]['Link']], job_board[1]['source'], job_board[1]['name'])
+            data_fetcher = DataFetcher.create([job_board[1]['Job Feed']], job_board[1]['Source'], job_board[1]['Name'], job_board[1]['Platform'])
 
             data_fetcher.get_data()
 
@@ -24,18 +28,18 @@ for job_board in data_dict.iterrows():
             data_extractor.extract_job_list()
 
             jobs_list.append(data_extractor.jobs_list)
-            print(f"SUCCESS: Data fetched for {job_board[1]['name']}")
+            print(f"SUCCESS: Data fetched for {job_board[1]['Name']}")
         except Exception as e:
             if e.args[0] == 'Invalid source type':
-                print(f"ERROR: Invalid source type for {job_board[1]['name']}")
+                print(f"ERROR: Invalid source type for {job_board[1]['Name']}")
             elif e.args[0] == 'There is no extractor for the given Job Board':
-                print(f"ERROR: There is no extractor for the given Job Board {job_board[1]['name']}")
+                print(f"ERROR: There is no extractor for the given Job Board {job_board[1]['Name']}")
             elif e.args[0] == 'Invalid XML data':
-                print(f"ERROR: Invalid XML data for {job_board[1]['name']}")
+                print(f"ERROR: Invalid XML data for {job_board[1]['Name']}")
             else:
-                raise e
+                print(f"ERROR: {e} for {job_board[1]['Name']}")
     else:
-        print(f"NO data for {job_board[1]['name']}")
+        print(f"NO data for {job_board[1]['Name']}")
 
 
 
